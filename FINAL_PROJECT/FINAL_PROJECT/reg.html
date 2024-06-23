@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Page</title>
+    <script>
+        function register() {
+            var username = document.getElementById("username").value.trim();
+            var password = document.getElementById("password").value.trim();
+
+            if (username && password) {
+                // Simulate registration by setting a flag in local storage
+                localStorage.setItem("isRegistered", "true");
+                // Redirect to the login page after registration
+                window.location.href = "lg.html";
+                
+            } else {
+                alert("Please enter a username and password to register.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Registration</h2>
+    <form onsubmit="event.preventDefault(); register();">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+        </div>
+        <div>
+            <button type="submit">Register</button>
+        </div>
+    </form>
+</body>
+</html>

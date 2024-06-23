@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Patient Details Form</title>
+    <style>
+        .gradient-pink {
+            background: linear-gradient(to right, #f7cac9, #fae3e3);
+            padding: 5px;
+        }
+
+        .gradient-blue {
+            background: linear-gradient(to right, #a7c7e7, #d3e0ea);
+            padding: 5px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #prediction {
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .predict-no-risk {
+            color: green;
+        }
+
+        .predict-risk {
+            color: red;
+        }
+
+        .predict-caution {
+            color: yellow;
+        }
+    </style>
+    <script>
+        function predictHeartDisease() {
+            const systolic = parseInt(document.getElementById("systolic").value);
+            const diastolic = parseInt(document.getElementById("diastolic").value);
+
+            const predictionElement = document.getElementById("prediction");
+            if (systolic < 120 && diastolic < 80) {
+                predictionElement.textContent = "No risk of heart disease.";
+                predictionElement.className = "predict-no-risk";
+            } else if (systolic >= 120 && systolic < 130 && diastolic < 80) {
+                predictionElement.textContent = "Elevated blood pressure - risk of heart disease.";
+                predictionElement.className = "predict-caution";
+            } else if (systolic >= 130 || diastolic >= 80) {
+                predictionElement.textContent = "High blood pressure - potential heart disease risk.";
+                predictionElement.className = "predict-risk";
+            } else if (systolic <= 90 || diastolic <= 60) {
+                predictionElement.textContent = "Hypotension - low blood pressure.";
+                predictionElement.className = "predict-caution";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Patient Details Form</h1>
+    <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br><br>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age"><br><br>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select><br><br>
+
+        <div class="gradient-pink">
+            <label for="fastingSugar">Fasting Sugar Level:</label>
+            <input type="radio" id="fastingSugarNormal" name="fastingSugar" value="normal"> Normal (≤99 mg/dL)
+            <input type="radio" id="fastingSugarPrediabetes" name="fastingSugar" value="prediabetes"> Prediabetes (100-125 mg/dL)
+            <input type="radio" id="fastingSugarDiabetes" name="fastingSugar" value="diabetes"> Diabetes (≥126 mg/dL)
+        </div><br><br>
+
+        <div class="gradient-blue">
+            <label for="systolic">Blood Pressure (Systolic):</label>
+            <input type="number" id="systolic" name="systolic"><br><br>
+
+            <label for="diastolic">Blood Pressure (Diastolic):</label>
+            <input type="number" id="diastolic" name="diastolic">
+        </div><br><br>
+
+        <label for="cholesterol">Cholesterol Level:</label><br>
+        <input type="radio" id="cholesterolDesirable" name="cholesterol" value="desirable"> Less than 200 mg/dL
+        <input type="radio" id="cholesterolBorderline" name="cholesterol" value="borderline"> 200-239 mg/dL (Borderline High)
+        <input type="radio" id="cholesterolHigh" name="cholesterol" value="high"> 240 mg/dL or higher (High Cholesterol)<br><br>
+
+        <label for="age">Maximum Heart Rate (bpm):</label>
+        <input type="text" id="maxHeartRate" name="maxHeartRate" disabled>
+        <button type="button" onclick="document.getElementById('maxHeartRate').value = 220 - document.getElementById('age').value">Calculate</button><br><br>
+
+        <button type="button" onclick="predictHeartDisease()">Predict Heart Disease Risk</button>
+
+        <div id="prediction" class="hidden">Prediction result will appear here.</div>
+    </form>
+</body>
+</html>

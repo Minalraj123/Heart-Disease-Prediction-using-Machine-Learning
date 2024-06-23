@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Registration Page</title>
+    <script>
+        async function register() {
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            const response = await fetch("/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ username, password }),
+            });
+
+            if (response.status === 201) {
+                alert("Registration successful!");
+                window.location.href = "lo.html"; // Redirect to login page
+            } else {
+                alert("Registration failed. Please try again.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Registration</h2>
+    <form onsubmit="event.preventDefault(); register();">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username">
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password">
+        </div>
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html>

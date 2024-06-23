@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login Page</title>
+    <script>
+        function login() {
+            var username = document.getElementById("username").value.trim();
+            var password = document.getElementById("password").value.trim();
+            var isRegistered = localStorage.getItem("isRegistered");
+
+            if (isRegistered !== "true") {
+                // If the user is not registered, redirect to the registration page
+                alert("It seems you're not registered. Redirecting to the registration page.");
+                window.location.href = "registration.html";
+            } else if (username && password) {
+                // If user is registered and provides credentials, indicate successful login
+                alert("Login successful. Redirecting to patient details.");
+                window.location.href = "patient_details.html"; // Redirect to the patient details page
+            } else {
+                // If fields are empty, prompt the user to enter credentials
+                alert("Please enter both username and password.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Login</h2>
+    <form onsubmit="event.preventDefault(); login();">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+        </div>
+        <div>
+            <button type="submit">Login</button>
+        </div>
+    </form>
+    <div>
+        <p>If you are not registered, please click below:</p>
+        <a href="registration.html">Register here</a>
+    </div>
+</body>
+</html>

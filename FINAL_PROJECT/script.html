@@ -1,0 +1,19 @@
+<script>
+    function login() {
+        var username = document.getElementById("username").value.trim();
+        var password = document.getElementById("password").value.trim();
+        var isRegistered = localStorage.getItem("isRegistered");
+        var storedUsername = localStorage.getItem("username");
+        var storedPassword = localStorage.getItem("password");
+
+        if (isRegistered !== "true") {
+            alert("It seems you're not registered. Redirecting to the registration page.");
+            window.location.href = "registration.html";
+        } else if (username === storedUsername && password === storedPassword) {
+            alert("Login successful. Redirecting to patient details.");
+            window.location.href = "patient_details.html";
+        } else {
+            alert("Invalid username or password. Please enter the correct credentials.");
+        }
+    }
+</script>
